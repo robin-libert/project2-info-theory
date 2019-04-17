@@ -20,6 +20,7 @@ def marginal_pDistrib(text):
 def binary_huffman_code(pDistrib):
     copy = pDistrib.copy()
     coded = dict()
+    memory = list()
     #create new dictionary with symbols
     for v in copy:
         coded[v] = ""
@@ -34,10 +35,16 @@ def binary_huffman_code(pDistrib):
         copy.pop(min2Key)
         summ = min1V + min2V
         copy[min1Key+min2Key] = summ
-        for e in min1Key:
-            coded[e] += '1'
-        for e in min2Key:
-            coded[e] += '0'
+        if(min1Key[0] <= min2Key[0]):
+            for e in min1Key:
+                coded[e] += '0'
+            for e in min2Key:
+                coded[e] += '1'
+        else:
+            for e in min2Key:
+                coded[e] += '0'
+            for e in min1Key:
+                coded[e] += '1'
     for e in coded:
         #reverse a string
         coded[e] = coded[e][::-1]
