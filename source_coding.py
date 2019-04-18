@@ -20,7 +20,6 @@ def marginal_pDistrib(text):
 def binary_huffman_code(pDistrib):
     copy = pDistrib.copy()
     coded = dict()
-    memory = list()
     #create new dictionary with symbols
     for v in copy:
         coded[v] = ""
@@ -64,3 +63,6 @@ def expected_average_length(pDistrib):
     for s in huffman_code:
         n += len(huffman_code[s]) * pDistrib[s]
     return n
+
+def compression_rate(text, encoded_text):
+    return len(text)/len(encoded_text)

@@ -12,10 +12,10 @@ additional_characters = list('.,;:\'?!-=/& ')
 
 def import_text(file):
     with open('text.csv','r') as csvFile:
-        char = list()
+        char = ""
         for line in csvFile:
             for symbol in line:
-                char.append(symbol.lower())
+                char += symbol.lower()
         return char
     
 text = import_text('text.csv')
@@ -30,3 +30,4 @@ print('4.   Coded text : ', encoded_text)
 print('     Length of th coded text :', len(encoded_text), '\n')
 print('5.   Expected average length :', expected_average_length(pDistrib))
 print('     Empirical average length :', len(encoded_text) / len(text), '\n')
+#print(compression_rate(text, encoded_text))
