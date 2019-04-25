@@ -26,23 +26,25 @@ def binary_huffman_code(pDistrib):
     summ = 0
     while(summ != 1):
         #find the 2 lowest valued symbols
-        min1Key = min(copy, key = copy.get)
-        min1V = min(copy.values())
-        copy.pop(min1Key)
-        min2Key = min(copy, key = copy.get)
-        min2V = min(copy.values())
-        copy.pop(min2Key)
-        summ = min1V + min2V
-        copy[min1Key+min2Key] = summ
-        if(min1Key[0] <= min2Key[0]):
-            for e in min1Key:
+        minKeys = []
+        minValues = []
+        for n in range(2):
+            minKeys.append(min(copy, key = copy.get))
+            minValues.append(min(copy.values()))
+            copy.pop(minKeys[n])
+        #summ is sused to stop the while loop
+        summ = minValues[0] + minValues[1]
+        #create the values of the coded dictionary
+        copy[minKeys[0] + minKeys[1]] = summ
+        if(minKeys[0][0] <= minKeys[1][0]):
+            for e in minKeys[0]:
                 coded[e] += '0'
-            for e in min2Key:
+            for e in minKeys[1]:
                 coded[e] += '1'
         else:
-            for e in min2Key:
+            for e in minKeys[1]:
                 coded[e] += '0'
-            for e in min1Key:
+            for e in minKeys[0]:
                 coded[e] += '1'
     for e in coded:
         #reverse a string
@@ -65,4 +67,4 @@ def expected_average_length(pDistrib):
     return n
 
 def compression_rate(text, encoded_text):
-    return len(text)/len(encoded_text)
+    return (8*len(text))/len(encoded_text)
