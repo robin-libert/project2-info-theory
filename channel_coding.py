@@ -131,35 +131,21 @@ def recover_corrupted_symbol(symbol):
                 index.append(i)
             i += 1
         if(counter > 1):
-            strCopy = ''
+            def recover(n,strCopy=''):
+                for e in range(len(symbol)):
+                    if(e == n):
+                        strCopy += str((int(symbol[e]) + 1) % 2)
+                    else:
+                        strCopy += symbol[e]
+                return strCopy
             if(index == [0,2]):
-                for e in range(len(symbol)):
-                    if(e == 0):
-                        strCopy += str((int(symbol[e]) + 1) % 2)
-                    else:
-                        strCopy += symbol[e]
-                return strCopy
+                return recover(0)
             elif(index == [0,1]):
-                for e in range(len(symbol)):
-                    if(e == 1):
-                        strCopy += str((int(symbol[e]) + 1) % 2)
-                    else:
-                        strCopy += symbol[e]
-                return strCopy
+                return recover(1)
             elif(index == [0,1,2]):
-                for e in range(len(symbol)):
-                    if(e == 2):
-                        strCopy += str((int(symbol[e]) + 1) % 2)
-                    else:
-                        strCopy += symbol[e]
-                return strCopy
+                return recover(2)
             elif(index == [1,2]):
-                for e in range(len(symbol)):
-                    if(e == 3):
-                        strCopy += str((int(symbol[e]) + 1) % 2)
-                    else:
-                        strCopy += symbol[e]
-                return strCopy
+                return recover(3)
         else:
             return coding_table[symbol[0:4]]
         
